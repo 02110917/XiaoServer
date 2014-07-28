@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="Collection"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="Content"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="ContentType"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="Diary"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="ErShou"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="ErShouGoodsType"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="ErShouImage"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="ErShouType"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="Friend"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="Message"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="PingLun"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="Praise"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="UserInfo"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="WenZhang"/>
+  <table-filter match-catalog="Xiao" match-schema="dbo" match-name="WenZhangType"/>
+</hibernate-reverse-engineering>

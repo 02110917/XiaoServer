@@ -1,0 +1,20 @@
+#MyEclipse Hibernate Properties
+#Sun Jul 27 22:11:19 CST 2014
+genBasicCompId=false
+sessionFactoryName=com.flying.xiao.dao.HibernateSessionFactory
+profile=
+daoSFId=
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=
+configFile=/XiaoServer/src/hibernate.cfg.xml
+createConfigFile=true

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <servlet>
+    <description>user login servlet</description>
+    <servlet-name>GetContent</servlet-name>
+    <servlet-class>com.flying.xiao.servlet.GetContent</servlet-class>
+  </servlet>
+  <servlet>
+    <description>user login servlet</description>
+    <servlet-name>GetContentDetail</servlet-name>
+    <servlet-class>com.flying.xiao.servlet.GetContentDetail</servlet-class>
+  </servlet>
+  <servlet>
+    <description>user login servlet</description>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.flying.xiao.servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>发布评论</description>
+    <servlet-name>PubComment</servlet-name>
+    <servlet-class>com.flying.xiao.servlet.PubComment</servlet-class>
+  </servlet>
+  <servlet>
+    <description>赞操作 </description>
+    <servlet-name>PraiseOperate</servlet-name>
+    <servlet-class>com.flying.xiao.servlet.PraiseOperate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>获取二手类别列表</description>
+    <servlet-name>GetMarketType</servlet-name>
+    <servlet-class>com.flying.xiao.servlet.GetMarketType</servlet-class>
+  </servlet>
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>GetContentDetail</servlet-name>
+    <url-pattern>/servlet/GetContentDetail</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>GetContent</servlet-name>
+    <url-pattern>/servlet/GetContent</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/servlet/UserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PubComment</servlet-name>
+    <url-pattern>/servlet/PubComment</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PraiseOperate</servlet-name>
+    <url-pattern>/servlet/PraiseOperate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetMarketType</servlet-name>
+    <url-pattern>/servlet/GetMarketType</url-pattern>
+  </servlet-mapping>
+</web-app>
