@@ -10,6 +10,7 @@ public class XContent extends Base
 	private String conImageUrl ;
 	private String userRealNama ;
 	private List<XPraise> praiseList ;
+	private double price ;
 	public List<XPraise> getPraiseList()
 	{
 		return praiseList;
@@ -126,4 +127,13 @@ public class XContent extends Base
 	{
 		this.conTypeId = conTypeId;
 	}
+	public double getPrice()
+	{
+		return price;
+	}
+	public void setPrice(double price)
+	{
+		this.price = price;
+	}
+	
 }

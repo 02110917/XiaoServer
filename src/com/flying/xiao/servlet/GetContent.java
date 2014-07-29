@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.flying.xiao.bean.Content;
+import com.flying.xiao.bean.ErShou;
 import com.flying.xiao.bean.PingLun;
 import com.flying.xiao.bean.Praise;
 import com.flying.xiao.constant.Constant;
+import com.flying.xiao.dao.BaseHibernateDAO;
 import com.flying.xiao.dao.CommentDaoImpl;
 import com.flying.xiao.dao.ContentDAO;
 import com.flying.xiao.dao.ContentDaoImpl;
@@ -119,7 +121,11 @@ public class GetContent extends HttpServlet
 					xcon.setPraiseList(xpraises);
 				}
 
-			} 
+			} else if(type==Constant.ContentType.CONTENT_TYPE_MARKET){//如果是获取市场信息 还需要返回价格
+				IBaseHibernateDAO<ErShou> dao=new BaseHibernateDAO<ErShou>();
+				ErShou es=dao.findByHql("from ErShou es where es.content.id="+con.getId()).get(0);
+				xcon.setPrice(es.getEsPrice());
+			}
 			xConList.add(xcon);
 		}
 		Gson gson = new Gson();
