@@ -13,7 +13,9 @@
 			jdbc:sqlserver://202.119.199.111:1433
 		</property>
 		<property name="connection.username">sqlserver111</property>
-		<property name="connection.password">online@sqlserver111</property>
+		<property name="connection.password">
+			online@sqlserver111
+		</property>
 		<property name="connection.driver_class">
 			com.microsoft.sqlserver.jdbc.SQLServerDriver
 		</property>
@@ -32,11 +34,13 @@
 		<mapping resource="com/flying/xiao/bean/Collection.hbm.xml" />
 		<mapping
 			resource="com/flying/xiao/bean/ErShouGoodsType.hbm.xml" />
-		<mapping resource="com/flying/xiao/bean/ErShouImage.hbm.xml" />
 		<mapping resource="com/flying/xiao/bean/ContentType.hbm.xml" />
 		<mapping resource="com/flying/xiao/bean/PingLun.hbm.xml" />
 		<mapping resource="com/flying/xiao/bean/Diary.hbm.xml" />
 		<mapping resource="com/flying/xiao/bean/Friend.hbm.xml" />
+		<mapping resource="com/flying/xiao/bean/Image.hbm.xml" />
+		<mapping
+			resource="com/flying/xiao/bean/ErShouGoodsTypeSecond.hbm.xml" />
 
 	</session-factory>
 

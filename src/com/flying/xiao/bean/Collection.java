@@ -1,69 +1,72 @@
 package com.flying.xiao.bean;
 
+
+
 /**
  * Collection entity. @author MyEclipse Persistence Tools
  */
 
-public class Collection implements java.io.Serializable
-{
+public class Collection  implements java.io.Serializable {
 
-	// Fields
 
-	private Long id;
-	private Content content;
-	private UserInfo userInfo;
+    // Fields    
 
-	// Constructors
+     private Long id;
+     private Content content;
+     private UserInfo userInfo;
 
-	/** default constructor */
-	public Collection()
-	{
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public Collection() {
+    }
 
 	/** minimal constructor */
-	public Collection(Long id)
-	{
-		this.id = id;
-	}
+    public Collection(Long id) {
+        this.id = id;
+    }
+    
+    /** full constructor */
+    public Collection(Long id, Content content, UserInfo userInfo) {
+        this.id = id;
+        this.content = content;
+        this.userInfo = userInfo;
+    }
 
-	/** full constructor */
-	public Collection(Long id, Content content, UserInfo userInfo)
-	{
-		this.id = id;
-		this.content = content;
-		this.userInfo = userInfo;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Long getId() {
+        return this.id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getId()
-	{
-		return this.id;
-	}
+    public Content getContent() {
+        return this.content;
+    }
+    
+    public void setContent(Content content) {
+        this.content = content;
+    }
 
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
+    public UserInfo getUserInfo() {
+        return this.userInfo;
+    }
+    
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+   
 
-	public Content getContent()
-	{
-		return this.content;
-	}
 
-	public void setContent(Content content)
-	{
-		this.content = content;
-	}
 
-	public UserInfo getUserInfo()
-	{
-		return this.userInfo;
-	}
 
-	public void setUserInfo(UserInfo userInfo)
-	{
-		this.userInfo = userInfo;
-	}
+
+
+
 
 }

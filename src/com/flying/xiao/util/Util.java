@@ -85,4 +85,21 @@ public class Util
 
 		return dataList;
 	}
+	
+	public static <T> List<Base> toBaseList(List<T> list){
+		if(list==null||list.size()==0)
+			return null;
+		else 
+		{
+			List<Base> baseList=new ArrayList<Base>();
+			for(T t:list){
+				Base base=new Base();
+				base.copy(t);
+				baseList.add(base);
+			}
+			return baseList ;
+		}
+	}
+	
+	
 }

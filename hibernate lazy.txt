@@ -1,0 +1,25 @@
+¡¾content¡¿ 
+ <many-to-one name="userInfo" class="com.flying.xiao.bean.UserInfo" fetch="select" lazy="false">
+            <column name="con_user_id" />
+        </many-to-one>
+
+¡¾pl¡¿
+ <many-to-one name="pingLun" class="com.flying.xiao.bean.PingLun" fetch="select" lazy="false">
+            <column name="pl_re_pl_id" />
+        </many-to-one>
+        <many-to-one name="userInfo" class="com.flying.xiao.bean.UserInfo" fetch="select" lazy="false">
+            <column name="pl_from_user_id" />
+        </many-to-one>
+
+¡¾praise¡¿ <many-to-one name="userInfo" class="com.flying.xiao.bean.UserInfo" fetch="select" lazy="false">
+            <column name="user_id" />
+        </many-to-one>
+
+¡¾ErShou¡¿
+
+ <many-to-one name="erShouType" class="com.flying.xiao.bean.ErShouType" fetch="select" lazy="false">
+            <column name="es_type_id" />
+        </many-to-one>
+        <many-to-one name="erShouGoodsType" class="com.flying.xiao.bean.ErShouGoodsType" fetch="select" lazy="false">
+            <column name="es_goods_type_id" />
+        </many-to-one>

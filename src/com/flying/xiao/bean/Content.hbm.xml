@@ -67,6 +67,12 @@
             </key>
             <one-to-many class="com.flying.xiao.bean.Diary" />
         </set>
+        <set name="images" inverse="true">
+            <key>
+                <column name="image_content_id" />
+            </key>
+            <one-to-many class="com.flying.xiao.bean.Image" />
+        </set>
         <set name="collections" inverse="true">
             <key>
                 <column name="col_con_id" />

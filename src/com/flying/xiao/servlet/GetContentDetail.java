@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.flying.xiao.bean.Content;
+import com.flying.xiao.bean.ErShou;
+import com.flying.xiao.bean.Image;
 import com.flying.xiao.bean.PingLun;
 import com.flying.xiao.bean.WenZhang;
 import com.flying.xiao.constant.Constant;
@@ -21,8 +23,11 @@ import com.flying.xiao.dao.ContentDaoImpl;
 import com.flying.xiao.dao.IBaseHibernateDAO;
 import com.flying.xiao.entity.XComment;
 import com.flying.xiao.entity.XContentDetail;
+import com.flying.xiao.entity.XGoodType;
+import com.flying.xiao.entity.XImage;
+import com.flying.xiao.entity.XMarketDetail;
+import com.flying.xiao.entity.XMarketType;
 import com.flying.xiao.entity.XUserInfo;
-import com.google.gson.Gson;
 
 public class GetContentDetail extends HttpServlet
 {
@@ -62,7 +67,7 @@ public class GetContentDetail extends HttpServlet
 			 XContentDetail xcon=new XContentDetail();
 			 IBaseHibernateDAO<WenZhang> dao=new BaseHibernateDAO<WenZhang>();
 			 List<WenZhang> lists=dao.findByHql("from WenZhang wz where wz.content.id="+id);
-			 if(lists.size()>0){
+			 if(lists!=null&&lists.size()>0){
 				 ContentDAO contentDao=new ContentDaoImpl();
 				 Content c=contentDao.findById(id);
 				 c.setConHot(c.getConHot()+1);
@@ -89,17 +94,45 @@ public class GetContentDetail extends HttpServlet
 				 
 			 }
 			 else{
-				 xcon.setErrorCode(1);
-				 xcon.setErrorMsg("没有改文章内容...");
+				 xcon.setErrorCode(Constant.ErrorCode.GET_CONTENT_DETAIL_NO_CONTENT);
+				 xcon.setErrorMsg("没有该项目,可能已被删除");
 			 }
-			Gson gson = new Gson();
-			String json = gson.toJson(xcon);
-			pw.write(json);
+			pw.write(xcon.toJson());
 		} else if (type.equalsIgnoreCase(Constant.ContentType.CONTENT_TYPE_LOST + ""))
 		{
 
 		} else if (type.equalsIgnoreCase(Constant.ContentType.CONTENT_TYPE_MARKET + ""))
 		{
+			XMarketDetail xMarket=new XMarketDetail() ;
+			IBaseHibernateDAO<ErShou> es_dao=new BaseHibernateDAO<ErShou>();
+			List<ErShou> markets=es_dao.findByHql("from ErShou es where es.content.id="+id);
+			if(markets==null||markets.size()<=0){
+				xMarket.setErrorCode(Constant.ErrorCode.GET_MARKET_DETAIL_NO_MARKET);
+				xMarket.setErrorMsg("没有该项目,可能已被删除");
+			}else{
+				ErShou market=markets.get(0);
+				xMarket.copy(market);
+				XMarketType marketType=new XMarketType();
+				marketType.copy(market.getErShouType());
+				xMarket.setErShouType(marketType);
+				XGoodType goodType=new XGoodType();
+				goodType.copy(market.getErShouGoodsType());
+				xMarket.setErShouGoodsType(goodType);
+				xMarket.setContentId(id);
+				IBaseHibernateDAO<Image> image_dao=new BaseHibernateDAO<Image>();
+				List<Image> images= image_dao.findByHql("from Image image where image.content.id="+id);
+				List<XImage> ximages=new ArrayList<XImage>();
+				if(images!=null&&images.size()>0){
+					for(Image image:images){
+						XImage ximage=new XImage();
+						ximage.copy(image);
+						ximage.setContentId(id);
+						ximages.add(ximage);
+					}
+				}
+				xMarket.setImages(ximages);
+			}
+			pw.write(xMarket.toJson());
 		} else if (type.equalsIgnoreCase("market"))
 		{
 		}

@@ -8,7 +8,7 @@
     <class name="com.flying.xiao.bean.UserInfo" table="UserInfo" schema="dbo" catalog="Xiao">
         <id name="id" type="java.lang.Long">
             <column name="id" />
-            <generator class="native" />
+            <generator class="assigned" />
         </id>
         <property name="userName" type="java.lang.String">
             <column name="user_name" length="50" />

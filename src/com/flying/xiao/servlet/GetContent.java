@@ -22,6 +22,7 @@ import com.flying.xiao.dao.ContentDaoImpl;
 import com.flying.xiao.dao.IBaseHibernateDAO;
 import com.flying.xiao.dao.PraiseDAO;
 import com.flying.xiao.dao.PraiseDaoImpl;
+import com.flying.xiao.entity.Base;
 import com.flying.xiao.entity.XComment;
 import com.flying.xiao.entity.XContent;
 import com.flying.xiao.entity.XPraise;
@@ -75,6 +76,14 @@ public class GetContent extends HttpServlet
 	{
 		List<Content> conList = conDao.findByTypeId(type, 20 * page, 20);
 		List<XContent> xConList = new ArrayList<XContent>();
+		if(conList==null||conList.size()<=0){
+			Base base=new Base();
+			base.setErrorCode(2);
+			base.setErrorMsg("没有找到数据///");
+			pw.write(base.toJson());
+			pw.flush();
+			pw.close();
+		}
 		for (Content con : conList)
 		{
 			XContent xcon = new XContent();

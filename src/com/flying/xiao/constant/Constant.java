@@ -8,6 +8,8 @@ public class Constant
 		public static final int PARAM_ERROR=0X03;//参数错误
 		public static final int USER_NOT_LOGIN=0X04;//用户未登陆 或则session失效
 		public static final int PRAISE_OPERATE_ERROR=0X05;//赞出错
+		public static final int GET_CONTENT_DETAIL_NO_CONTENT=0X06;
+		public static final int GET_MARKET_DETAIL_NO_MARKET=0X07;
 	}
 	
 	public static class ContentType{

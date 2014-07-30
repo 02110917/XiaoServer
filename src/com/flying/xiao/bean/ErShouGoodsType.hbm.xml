@@ -8,11 +8,17 @@
     <class name="com.flying.xiao.bean.ErShouGoodsType" table="ErShouGoodsType" schema="dbo" catalog="Xiao">
         <id name="esGoodsTypeId" type="java.lang.Integer">
             <column name="es_goods_type_id" />
-            <generator class="native" />
+            <generator class="assigned" />
         </id>
         <property name="esGoodsTypeName" type="java.lang.String">
             <column name="es_goods_type_name" length="50" />
         </property>
+        <set name="erShouGoodsTypeSeconds" inverse="true">
+            <key>
+                <column name="type_first_id" />
+            </key>
+            <one-to-many class="com.flying.xiao.bean.ErShouGoodsTypeSecond" />
+        </set>
         <set name="erShous" inverse="true">
             <key>
                 <column name="es_goods_type_id" />
