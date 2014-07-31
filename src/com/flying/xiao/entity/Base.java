@@ -1,12 +1,13 @@
 package com.flying.xiao.entity;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-public class Base {
+public class Base implements Serializable{
 	private String errorMsg;
 	private int errorCode;
 

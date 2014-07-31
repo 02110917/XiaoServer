@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.flying.xiao.bean.Content;
 import com.flying.xiao.bean.ErShou;
+import com.flying.xiao.bean.Image;
 import com.flying.xiao.bean.PingLun;
 import com.flying.xiao.bean.Praise;
 import com.flying.xiao.constant.Constant;
@@ -25,6 +26,7 @@ import com.flying.xiao.dao.PraiseDaoImpl;
 import com.flying.xiao.entity.Base;
 import com.flying.xiao.entity.XComment;
 import com.flying.xiao.entity.XContent;
+import com.flying.xiao.entity.XImage;
 import com.flying.xiao.entity.XPraise;
 import com.flying.xiao.entity.XUserInfo;
 import com.google.gson.Gson;
@@ -134,6 +136,19 @@ public class GetContent extends HttpServlet
 				IBaseHibernateDAO<ErShou> dao=new BaseHibernateDAO<ErShou>();
 				ErShou es=dao.findByHql("from ErShou es where es.content.id="+con.getId()).get(0);
 				xcon.setPrice(es.getEsPrice());
+				
+				IBaseHibernateDAO<Image> image_dao=new BaseHibernateDAO<Image>();
+				List<Image> images= image_dao.findByHql("from Image image where image.content.id="+con.getId());
+				List<XImage> ximages=new ArrayList<XImage>();
+				if(images!=null&&images.size()>0){
+					for(Image image:images){
+						XImage ximage=new XImage();
+						ximage.copy(image);
+						ximage.setContentId(con.getId());
+						ximages.add(ximage);
+					}
+				}
+				xcon.setImages(ximages);
 			}
 			xConList.add(xcon);
 		}

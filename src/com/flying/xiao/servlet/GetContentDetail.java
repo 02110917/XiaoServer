@@ -119,18 +119,18 @@ public class GetContentDetail extends HttpServlet
 				goodType.copy(market.getErShouGoodsType());
 				xMarket.setErShouGoodsType(goodType);
 				xMarket.setContentId(id);
-				IBaseHibernateDAO<Image> image_dao=new BaseHibernateDAO<Image>();
-				List<Image> images= image_dao.findByHql("from Image image where image.content.id="+id);
-				List<XImage> ximages=new ArrayList<XImage>();
-				if(images!=null&&images.size()>0){
-					for(Image image:images){
-						XImage ximage=new XImage();
-						ximage.copy(image);
-						ximage.setContentId(id);
-						ximages.add(ximage);
-					}
-				}
-				xMarket.setImages(ximages);
+//				IBaseHibernateDAO<Image> image_dao=new BaseHibernateDAO<Image>();
+//				List<Image> images= image_dao.findByHql("from Image image where image.content.id="+id);
+//				List<XImage> ximages=new ArrayList<XImage>();
+//				if(images!=null&&images.size()>0){
+//					for(Image image:images){
+//						XImage ximage=new XImage();
+//						ximage.copy(image);
+//						ximage.setContentId(id);
+//						ximages.add(ximage);
+//					}
+//				}
+//				xMarket.setImages(ximages);
 			}
 			pw.write(xMarket.toJson());
 		} else if (type.equalsIgnoreCase("market"))
