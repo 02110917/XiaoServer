@@ -51,4 +51,10 @@ public class ContentDaoImpl extends BaseHibernateDAO<Content> implements Content
 		return super.update(instance);
 	}
 
+	@Override
+	public boolean add(Content content) {
+		// TODO Auto-generated method stub
+		return super.save(content);
+	}
+
 }

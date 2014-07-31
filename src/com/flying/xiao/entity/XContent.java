@@ -13,6 +13,14 @@ public class XContent extends Base
 	private double price ;
 	private boolean isMeIsPraise;
 	private List<XImage> images;
+	private Timestamp conPubTime;
+	private Integer conZan;
+	private Integer conHot;
+	private String conTitle;
+	private Integer conPls;
+	private Integer conTypeId;
+	private List<XComment> comments;
+	private String conSummary;
 	
 	public List<XImage> getImages()
 	{
@@ -46,14 +54,6 @@ public class XContent extends Base
 	{
 		this.userRealNama = userRealNama;
 	}
-	private Timestamp conPubTime;
-	private Integer conZan;
-	private Integer conHot;
-	private String conTitle;
-	private Integer conPls;
-	private Integer conTypeId;
-	private List<XComment> comments;
-	private String conSummary;
 	public String getConSummary()
 	{
 		return conSummary;

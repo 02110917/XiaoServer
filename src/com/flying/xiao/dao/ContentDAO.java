@@ -23,4 +23,6 @@ public interface ContentDAO
 	public List<Content> findByWzTypeId(int wzTypeId,int firstResult,int size);
 	
 	public boolean  update(Content content);
+	
+	public boolean add(Content content );
 }

@@ -30,15 +30,11 @@
     <servlet-name>GetMarketType</servlet-name>
     <servlet-class>com.flying.xiao.servlet.GetMarketType</servlet-class>
   </servlet>
-
-
-
-
   <servlet-mapping>
     <servlet-name>GetContentDetail</servlet-name>
     <url-pattern>/servlet/GetContentDetail</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>GetContent</servlet-name>
     <url-pattern>/servlet/GetContent</url-pattern>
   </servlet-mapping>

@@ -1,2 +1,0 @@
-获取二手物品详情 
-/XiaoServer/servlet/GetContentDetail?type=4&id=3

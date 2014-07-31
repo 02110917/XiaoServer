@@ -28,5 +28,12 @@
 	<classpathentry kind="lib" path="libs/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="lib" path="libs/slf4j-nop-1.6.1.jar"/>
 	<classpathentry kind="lib" path="libs/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="libs/hibernate-commons-annotations-4.0.2.Final.jar"/>
+	<classpathentry kind="lib" path="libs/hibernate-core-4.2.5.Final.jar"/>
+	<classpathentry kind="lib" path="libs/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="libs/javassist-3.15.0-GA.jar"/>
+	<classpathentry kind="lib" path="libs/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="libs/jboss-transaction-api_1.1_spec-1.0.1.Final.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

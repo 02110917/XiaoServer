@@ -2,16 +2,13 @@ package com.flying.xiao.entity;
 
 import java.util.List;
 
-import com.flying.xiao.bean.Content;
-import com.flying.xiao.bean.ErShouGoodsType;
-import com.flying.xiao.bean.ErShouType;
-
 public class XMarketDetail extends Base
 {
 	private Long esId;
 	private XMarketType erShouType;
 	private XGoodType erShouGoodsType;
 	private long contentId;
+	private XContent content;
 	private String esMiaoshu;
 	private Double esPrice;
 	private Double esNewPrice;
@@ -19,6 +16,15 @@ public class XMarketDetail extends Base
 	private String esPhone;
 	private String esName;
 	private List<XImage> images;
+	private List<XComment> comments ;
+	
+	public List<XComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<XComment> comments) {
+		this.comments = comments;
+	}
 
 	public List<XImage> getImages()
 	{
@@ -58,6 +64,14 @@ public class XMarketDetail extends Base
 	public void setErShouType(XMarketType erShouType)
 	{
 		this.erShouType = erShouType;
+	}
+
+	public XContent getContent() {
+		return content;
+	}
+
+	public void setContent(XContent content) {
+		this.content = content;
 	}
 
 	public XGoodType getErShouGoodsType()

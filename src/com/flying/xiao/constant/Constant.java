@@ -10,6 +10,8 @@ public class Constant
 		public static final int PRAISE_OPERATE_ERROR=0X05;//ÔÞ³ö´í
 		public static final int GET_CONTENT_DETAIL_NO_CONTENT=0X06;
 		public static final int GET_MARKET_DETAIL_NO_MARKET=0X07;
+		public static final int SAVE_CONTENT_ERROR=0X08;
+		public static final int GET_COLLECTION_ERROR=0X09; 
 	}
 	
 	public static class ContentType{
