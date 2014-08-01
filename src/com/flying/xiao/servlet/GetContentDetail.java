@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.flying.xiao.bean.Content;
 import com.flying.xiao.bean.ErShou;
-import com.flying.xiao.bean.Image;
 import com.flying.xiao.bean.PingLun;
 import com.flying.xiao.bean.WenZhang;
 import com.flying.xiao.constant.Constant;
@@ -24,32 +22,34 @@ import com.flying.xiao.dao.IBaseHibernateDAO;
 import com.flying.xiao.entity.XComment;
 import com.flying.xiao.entity.XContentDetail;
 import com.flying.xiao.entity.XGoodType;
-import com.flying.xiao.entity.XImage;
 import com.flying.xiao.entity.XMarketDetail;
 import com.flying.xiao.entity.XMarketType;
 import com.flying.xiao.entity.XUserInfo;
 
-public class GetContentDetail extends HttpServlet
+public class GetContentDetail extends BaseServlet
 {
 	private ContentDAO conDao = new ContentDaoImpl();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		response.setContentType("text/json;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/json;charset=UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+		super.doGet(request, response);
 		try
 		{
 			long id = Long.parseLong(request.getParameter("id"));
 			String type = request.getParameter("type");
-			if (type != null)
-			{
-				PrintWriter pw = response.getWriter();
-				doOperator(pw,id,type);
+			if(type==null){
+				printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误...", pw);
+				return ;
 			}
+			doOperator(pw,id,type);
+			
 		} catch (NumberFormatException e)
 		{
 			e.printStackTrace();
+			printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误...", pw);
 		}
 
 	}

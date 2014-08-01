@@ -1,1 +1,12 @@
 1. ErShouImagr 改为ContentImage  字段  erShouId 改为 contentId  1 Content 对应 多个 ContentImage 
+
+ 将GetContent 的参数type 改成 数值标号  
+ 
+ 		public static final int CONTENT_TYPE_NEWS=0x01; //资讯
+		public static final int CONTENT_TYPE_LOST=0x02; //失物
+		public static final int CONTENT_TYPE_DIARY=0x03; //新鲜事
+		public static final int CONTENT_TYPE_MARKET=0x04; //市场
+		public static final int CONTENT_TYPE_ASK=0x05; // 问答
+		
+		
+		【客户端相应的也需要改！！！】 【未改】

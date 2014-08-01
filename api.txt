@@ -1,32 +1,53 @@
-获取二手物品详情 
-/XiaoServer/servlet/GetContentDetail?type=4&id=3
- 返回  XContentDetail json 数据
- 
- 
-发布文章详情 包括问答和资讯  【session】
-/XiaoServer/servlet/PubContent
-post 参数 
-content	XContentDetail json 数据
-发布diary  【session】
-/XiaoServer/servlet/PubDiary
-post 参数 
-content XContent json 数据
-
-发布二手市场信息 【session】
-/XiaoServer/servlet/PubMarket
-post 参数
-content XMarketDetail json 数据 
-
-添加收藏  【session】
-/XiaoServer/servlet/AddCollection
-参数: contentid 内容id 
-
-获取我的收藏列表 【session】
-/XiaoServer/servlet/GetMyCollections
-
-返回 : List<XCollection>
-
-获取我的好友列表 【session】
-/XiaoServer/servlet/GetMyFriends
-
-返回 : List<XFriend>
+	获取内容标题列表
+	/XiaoServer/servlet/GetContent
+	参数
+	type 内容类型 
+		【
+			public static final int CONTENT_TYPE_NEWS=0x01; //资讯
+			public static final int CONTENT_TYPE_LOST=0x02; //失物
+			public static final int CONTENT_TYPE_DIARY=0x03; //新鲜事
+			public static final int CONTENT_TYPE_MARKET=0x04; //市场
+			public static final int CONTENT_TYPE_ASK=0x05; // 问答
+		】		
+	page  页数  为0返回最前面20条 
+	
+	发布评论信息 【session】
+	/XiaoServer/servlet/PubComment
+	参数
+	contentid 内容Id
+	userId  用户名id
+	commentInfo  评论内容
+	replyId 回复评论id【 可选参数 为null|0 表示对内容评论 否则对别人的评论回复】
+	
+	获取二手物品详情 
+	/XiaoServer/servlet/GetContentDetail?type=4&id=3
+	 返回  XContentDetail json 数据
+	 
+	 
+	发布文章详情 包括问答和资讯  【session】
+	/XiaoServer/servlet/PubContent
+	post 参数 
+	content	XContentDetail json 数据
+	发布diary  【session】
+	/XiaoServer/servlet/PubDiary
+	post 参数 
+	content XContent json 数据
+	
+	发布二手市场信息 【session】
+	/XiaoServer/servlet/PubMarket
+	post 参数
+	content XMarketDetail json 数据 
+	
+	添加收藏  【session】
+	/XiaoServer/servlet/AddCollection
+	参数: contentid 内容id 
+	
+	获取我的收藏列表 【session】
+	/XiaoServer/servlet/GetMyCollections
+	
+	返回 : List<XCollection>
+	
+	获取我的好友列表 【session】
+	/XiaoServer/servlet/GetMyFriends
+	
+	返回 : List<XFriend>

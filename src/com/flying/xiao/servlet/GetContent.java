@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,39 +30,50 @@ import com.flying.xiao.entity.XPraise;
 import com.flying.xiao.entity.XUserInfo;
 import com.google.gson.Gson;
 
-public class GetContent extends HttpServlet
+public class GetContent extends BaseServlet
 {
 	private ContentDAO conDao = new ContentDaoImpl();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		response.setContentType("text/json;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/json;charset=UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+		super.doGet(request, response);
 		String type = request.getParameter("type");
 		if (type != null)
 		{
 			String p = request.getParameter("page");
 			int page = (p == null ? 0 : Integer.parseInt(request.getParameter("page")));
-			PrintWriter pw = response.getWriter();
-			if (type.equalsIgnoreCase("news"))
+			try
 			{
-				doOperator(pw, Constant.ContentType.CONTENT_TYPE_NEWS, page);
-
-			} else if (type.equalsIgnoreCase("lost"))
-			{
-				doOperator(pw, Constant.ContentType.CONTENT_TYPE_LOST, page);
-
-			} else if (type.equalsIgnoreCase("diary"))
-			{
-				doOperator(pw, Constant.ContentType.CONTENT_TYPE_DIARY, page);
-			} else if (type.equalsIgnoreCase("market"))
-			{
-				doOperator(pw, Constant.ContentType.CONTENT_TYPE_MARKET, page);
-			} else if (type.equalsIgnoreCase("ask"))
-			{
-				doOperator(pw, Constant.ContentType.CONTENT_TYPE_ASK, page);
+				doOperator(pw, Integer.parseInt(type), page);
 			}
+			catch(NumberFormatException e){
+				e.printStackTrace();
+				printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误。。", pw);
+			}
+//			if (type.equalsIgnoreCase("news"))
+//			{
+//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_NEWS, page);
+//
+//			} else if (type.equalsIgnoreCase("lost"))
+//			{
+//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_LOST, page);
+//
+//			} else if (type.equalsIgnoreCase("diary"))
+//			{
+//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_DIARY, page);
+//			} else if (type.equalsIgnoreCase("market"))
+//			{
+//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_MARKET, page);
+//			} else if (type.equalsIgnoreCase("ask"))
+//			{
+//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_ASK, page);
+//			}
+		}else
+		{
+			printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误", pw);
 		}
 	}
 
