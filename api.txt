@@ -1,3 +1,10 @@
+	用户登录注册
+	/XiaoServer/servlet/UserServlet
+	参数:type 【login:登录    regist:注册】
+	登录:username
+		password
+		
+	注册:userinfo  【XUserInfo json 数据】
 	获取内容标题列表
 	/XiaoServer/servlet/GetContent
 	参数
@@ -38,10 +45,11 @@
 	post 参数
 	content XMarketDetail json 数据 
 	
-	添加收藏  【session】
-	/XiaoServer/servlet/AddCollection
+	收藏操作 【添加收藏 取消收藏】  【session】
+	/XiaoServer/servlet/CollectionOperate
 	参数: contentid 内容id 
-	
+		 isCancel 【true false 】【可选 为空代表添加收藏】
+		 
 	获取我的收藏列表 【session】
 	/XiaoServer/servlet/GetMyCollections
 	
@@ -51,3 +59,10 @@
 	/XiaoServer/servlet/GetMyFriends
 	
 	返回 : List<XFriend>
+	获取评论列表
+	/XiaoServer/servlet/GetComments
+	参数 
+	【session 可选】  !=null 代表获取我的评论列表
+	contentid 内容id
+	page 页数 【可选】 ==null代表获取前几天数据
+	

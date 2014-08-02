@@ -8,7 +8,7 @@
     <class name="com.flying.xiao.bean.WenZhangType" table="WenZhangType" schema="dbo" catalog="Xiao">
         <id name="wzTypeId" type="java.lang.Integer">
             <column name="wz_type_id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="wzTypeName" type="java.lang.String">
             <column name="wz_type_name" length="50" />

@@ -59,10 +59,10 @@ public class GetMyCollections extends BaseServlet {
 			xcc.setId(cc.getId());
 			XContent xcon=new XContent();
 			xcon.copy(cc.getContent());
-			xcon.setUserId(cc.getContent().getUserInfo().getId());
-			if (xcon.getConImageUrl() == null)
-				xcon.setConImageUrl(cc.getContent().getUserInfo().getUserHeadImageUrl());
-			xcon.setUserRealNama(cc.getContent().getUserInfo().getUserRealName());
+//			xcon.setUserId(cc.getContent().getUserInfo().getId());
+//			if (xcon.getConImageUrl() == null)
+//				xcon.setConImageUrl(cc.getContent().getUserInfo().getUserHeadImageUrl());
+//			xcon.setUserRealNama(cc.getContent().getUserInfo().getUserRealName());
 			xcc.setContent(xcon);
 			xcclist.add(xcc);
 		}

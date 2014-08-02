@@ -9,11 +9,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.flying.xiao.bean.Collection;
 import com.flying.xiao.bean.Content;
 import com.flying.xiao.bean.ErShou;
 import com.flying.xiao.bean.Image;
 import com.flying.xiao.bean.PingLun;
 import com.flying.xiao.bean.Praise;
+import com.flying.xiao.bean.UserInfo;
 import com.flying.xiao.constant.Constant;
 import com.flying.xiao.dao.BaseHibernateDAO;
 import com.flying.xiao.dao.CommentDaoImpl;
@@ -37,9 +39,10 @@ public class GetContent extends BaseServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-//		response.setContentType("text/json;charset=UTF-8");
-//		response.setCharacterEncoding("UTF-8");
+		// response.setContentType("text/json;charset=UTF-8");
+		// response.setCharacterEncoding("UTF-8");
 		super.doGet(request, response);
+		UserInfo userSession = (UserInfo) request.getSession().getAttribute("user");
 		String type = request.getParameter("type");
 		if (type != null)
 		{
@@ -47,31 +50,13 @@ public class GetContent extends BaseServlet
 			int page = (p == null ? 0 : Integer.parseInt(request.getParameter("page")));
 			try
 			{
-				doOperator(pw, Integer.parseInt(type), page);
-			}
-			catch(NumberFormatException e){
+				doOperator(pw, userSession, Integer.parseInt(type), page);
+			} catch (NumberFormatException e)
+			{
 				e.printStackTrace();
 				printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误。。", pw);
 			}
-//			if (type.equalsIgnoreCase("news"))
-//			{
-//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_NEWS, page);
-//
-//			} else if (type.equalsIgnoreCase("lost"))
-//			{
-//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_LOST, page);
-//
-//			} else if (type.equalsIgnoreCase("diary"))
-//			{
-//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_DIARY, page);
-//			} else if (type.equalsIgnoreCase("market"))
-//			{
-//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_MARKET, page);
-//			} else if (type.equalsIgnoreCase("ask"))
-//			{
-//				doOperator(pw, Constant.ContentType.CONTENT_TYPE_ASK, page);
-//			}
-		}else
+		} else
 		{
 			printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误", pw);
 		}
@@ -84,12 +69,13 @@ public class GetContent extends BaseServlet
 	 * @param type
 	 * @param page
 	 */
-	private void doOperator(PrintWriter pw, int type, int page)
+	private void doOperator(PrintWriter pw, UserInfo userSession, int type, int page)
 	{
-		List<Content> conList = conDao.findByTypeId(type, 20 * page, 20);
+		List<Content> conList = conDao.findByTypeId(type, Constant.MAX_PAGE_COUNT * page, Constant.MAX_PAGE_COUNT);
 		List<XContent> xConList = new ArrayList<XContent>();
-		if(conList==null||conList.size()<=0){
-			Base base=new Base();
+		if (conList == null || conList.size() <= 0)
+		{
+			Base base = new Base();
 			base.setErrorCode(2);
 			base.setErrorMsg("没有找到数据///");
 			pw.write(base.toJson());
@@ -100,10 +86,38 @@ public class GetContent extends BaseServlet
 		{
 			XContent xcon = new XContent();
 			xcon.copy(con);
-			xcon.setUserId(con.getUserInfo().getId());
-			if (xcon.getConImageUrl() == null)
-				xcon.setConImageUrl(con.getUserInfo().getUserHeadImageUrl());
-			xcon.setUserRealNama(con.getUserInfo().getUserRealName());
+			if (userSession != null)
+			{ // 如果session不为null 返回isMeCollecte 、isMeIsPraise
+				IBaseHibernateDAO<Collection> cc_dao = new BaseHibernateDAO<Collection>();
+				if (type == Constant.ContentType.CONTENT_TYPE_ASK
+						|| type == Constant.ContentType.CONTENT_TYPE_NEWS
+						|| type == Constant.ContentType.CONTENT_TYPE_MARKET)
+				{
+					List list = cc_dao.findByHql("from Collection as cc where cc.content.id=" + con.getId()
+							+ " and cc.userInfo.id=" + userSession.getId());
+					if (list != null && list.size() > 0)
+					{ // 已经收藏过
+						xcon.setMeCollecte(true);
+					} else
+					{
+						xcon.setMeCollecte(false);
+					}
+				}
+				if (type == Constant.ContentType.CONTENT_TYPE_DIARY)
+				{
+					IBaseHibernateDAO<Praise> pr_dao = new BaseHibernateDAO<Praise>();
+					List list = cc_dao.findByHql("from Praise as p where p.content.id=" + con.getId()
+							+ " and p.userInfo.id=" + userSession.getId());
+					if (list != null && list.size() > 0)
+					{ // 已经赞过
+						xcon.setMeIsPraise(true);
+						// System.out.println("已经赞啦........");
+					} else
+					{
+						xcon.setMeIsPraise(false);
+					}
+				}
+			}
 			if (type == Constant.ContentType.CONTENT_TYPE_DIARY)
 			{// 如果是获取新鲜事 把评论信息也返回
 				IBaseHibernateDAO<PingLun> dao_pl = new CommentDaoImpl();
@@ -142,17 +156,23 @@ public class GetContent extends BaseServlet
 					xcon.setPraiseList(xpraises);
 				}
 
-			} else if(type==Constant.ContentType.CONTENT_TYPE_MARKET){//如果是获取市场信息 还需要返回价格
-				IBaseHibernateDAO<ErShou> dao=new BaseHibernateDAO<ErShou>();
-				ErShou es=dao.findByHql("from ErShou es where es.content.id="+con.getId()).get(0);
+			} if (type == Constant.ContentType.CONTENT_TYPE_MARKET)
+			{// 如果是获取市场信息 还需要返回价格
+				IBaseHibernateDAO<ErShou> dao = new BaseHibernateDAO<ErShou>();
+				ErShou es = dao.findByHql("from ErShou es where es.content.id=" + con.getId()).get(0);
 				xcon.setPrice(es.getEsPrice());
-				
-				IBaseHibernateDAO<Image> image_dao=new BaseHibernateDAO<Image>();
-				List<Image> images= image_dao.findByHql("from Image image where image.content.id="+con.getId());
-				List<XImage> ximages=new ArrayList<XImage>();
-				if(images!=null&&images.size()>0){
-					for(Image image:images){
-						XImage ximage=new XImage();
+
+			}
+			if(type==Constant.ContentType.CONTENT_TYPE_LOST||type==Constant.ContentType.CONTENT_TYPE_MARKET){
+				IBaseHibernateDAO<Image> image_dao = new BaseHibernateDAO<Image>();
+				List<Image> images = image_dao.findByHql("from Image image where image.content.id="
+						+ con.getId());
+				List<XImage> ximages = new ArrayList<XImage>();
+				if (images != null && images.size() > 0)
+				{
+					for (Image image : images)
+					{
+						XImage ximage = new XImage();
 						ximage.copy(image);
 						ximage.setContentId(con.getId());
 						ximages.add(ximage);

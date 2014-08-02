@@ -8,7 +8,7 @@
     <class name="com.flying.xiao.bean.ErShou" table="ErShou" schema="dbo" catalog="Xiao">
         <id name="esId" type="java.lang.Long">
             <column name="es_id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="erShouType" class="com.flying.xiao.bean.ErShouType" fetch="select" lazy="false">
             <column name="es_type_id" />

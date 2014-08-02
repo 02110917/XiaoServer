@@ -9,4 +9,11 @@
 		public static final int CONTENT_TYPE_ASK=0x05; // 问答
 		
 		
-		【客户端相应的也需要改！！！】 【未改】
+		【客户端相应的也需要改！！！】
+		
+		
+让ContentDetail MarketDetail 继承 Content  
+
+获取Content时  先不获取 是否收藏 是否点赞【Diary除外】 
+
+获取 ContentDetail 时 

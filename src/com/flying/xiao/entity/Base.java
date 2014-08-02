@@ -65,10 +65,10 @@ public class Base implements Serializable{
 				}
 			} catch (NoSuchMethodException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 	}

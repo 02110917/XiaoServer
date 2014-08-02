@@ -1,30 +1,24 @@
 package com.flying.xiao.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flying.xiao.bean.Content;
 import com.flying.xiao.bean.UserInfo;
 import com.flying.xiao.constant.Constant;
 import com.flying.xiao.dao.UsersDao;
 import com.flying.xiao.dao.UsersDaoImpl;
 import com.flying.xiao.entity.XUserInfo;
 
-public class UserServlet extends HttpServlet
+public class UserServlet extends BaseServlet
 {
 	private UsersDao userDao=new UsersDaoImpl() ;
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-
-		response.setContentType("text/json;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
+		super.doGet(request, response);
 		String type = request.getParameter("type");
 		if (type != null)
 		{
@@ -55,22 +49,34 @@ public class UserServlet extends HttpServlet
 //				XUserInfo x=new XUserInfo();
 //				x=(XUserInfo) x.jsonToBase(jsonStr);
 //				System.out.println(x.getUserEmail());
-				out.print(xUser.toJson());
-				out.flush();
-				out.close();
+				pw.print(xUser.toJson());
+				pw.flush();
+				pw.close();
 			}
 			else if(type.equals("regist")){//ÓÃ»§×¢²á
-				
+				String userInfoJson=request.getParameter("userinfo");
+				if(userInfoJson==null){
+					printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "²ÎÊý´íÎó", pw);
+					return ;
+				}
+				XUserInfo xuser=new XUserInfo();
+				xuser=(XUserInfo) xuser.jsonToBase(userInfoJson);
+				UsersDao userDao=new UsersDaoImpl() ;
+				UserInfo userInfo=new UserInfo();
+				xuser.copyToHibernateBean(userInfo);
+				boolean save=userDao.save(userInfo);
+				if(save){
+					request.getSession().setAttribute("user", userInfo);
+					pw.write(xuser.toJson());
+					pw.flush();
+					pw.close();
+				}
+				else{
+					printErrorMsg(Constant.ErrorCode.USER_REGIEST_ERROR, "×¢²áÊ§°Ü", pw);
+				}
 			}
 		}		
 		
-	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException
-	{
-
-		this.doGet(request, response);
 	}
 
 }

@@ -8,7 +8,7 @@
     <class name="com.flying.xiao.bean.PingLun" table="PingLun" schema="dbo" catalog="Xiao">
         <id name="plId" type="java.lang.Long">
             <column name="pl_id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="content" class="com.flying.xiao.bean.Content" fetch="select">
             <column name="pl_con_id" />

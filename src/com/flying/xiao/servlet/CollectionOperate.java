@@ -2,6 +2,7 @@ package com.flying.xiao.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +22,8 @@ import com.flying.xiao.dao.IBaseHibernateDAO;
 /**
  * Servlet implementation class addCollection
  */
-@WebServlet("/servlet/AddCollection")
-public class AddCollection extends BaseServlet {
+@WebServlet("/servlet/CollectionOperate")
+public class CollectionOperate extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
   
@@ -38,6 +39,7 @@ public class AddCollection extends BaseServlet {
 			return ;
 		}
 		String contentIdStr=request.getParameter("contentid") ;
+		String isCalcel=request.getParameter("isCancel");
 		if(contentIdStr==null)
 		{
 			printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误...", pw);
@@ -45,7 +47,7 @@ public class AddCollection extends BaseServlet {
 		}
 		try{
 			long contentid=Long.parseLong(contentIdStr);
-			doOperate(contentid,userSession,pw);
+			doOperate(contentid,userSession,isCalcel,pw);
 		}catch(NumberFormatException e){
 			e.printStackTrace();
 			printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误...", pw);
@@ -53,21 +55,47 @@ public class AddCollection extends BaseServlet {
 		}
 	}		
 	
-	private void doOperate(long id,UserInfo user,PrintWriter pw){
+	private void doOperate(long id,UserInfo user,String isCalcel,PrintWriter pw){
 		ContentDAO dao=new ContentDaoImpl();
 		Content con=dao.findById(id); 
 		if(con==null){
 			printErrorMsg(Constant.ErrorCode.PARAM_ERROR, "参数错误...", pw);
 			return ;
 		}
-		Collection collection=new Collection() ;
-		collection.setContent(con);
-		collection.setUserInfo(user);
 		IBaseHibernateDAO<Collection> cc_dao=new BaseHibernateDAO<Collection>();
-		boolean save=cc_dao.save(collection);
+		Collection collection=findCollection(cc_dao,user.getId(),id);
+		boolean save=false ;
+		if(isCalcel==null||isCalcel.equals("false")){ //添加收藏
+			if(collection!=null){
+				printErrorMsg(Constant.ErrorCode.SAVE_CONTENT_ERROR, "添加收藏出错...您已经收藏了该内容，不能再次收藏", pw);
+				return ;
+			}else
+			{
+			collection=new Collection() ;
+			collection.setContent(con);
+			collection.setUserInfo(user);
+			save=cc_dao.save(collection);
+			}
+		}else{ //取消收藏
+			if(collection==null){
+				printErrorMsg(Constant.ErrorCode.SAVE_CONTENT_ERROR, "取消收藏出错...您还未收藏该文章，不能取消", pw);
+				return ;
+			}
+			save=cc_dao.delete(collection);
+		}
 		if(save)
 			printSuccessMsg(pw);
 		else
-			printErrorMsg(Constant.ErrorCode.SAVE_CONTENT_ERROR, "保存出错...", pw);
+			printErrorMsg(Constant.ErrorCode.SAVE_CONTENT_ERROR, "操作出错...", pw);
 	}
+
+	private Collection findCollection(IBaseHibernateDAO<Collection> cc_dao,long userId,long contentId){
+		Collection cc=null;
+		List list=cc_dao.findByHql("from Collection as cc where cc.content.id="+contentId+" and cc.userInfo.id="+userId);
+		if(list!=null&&list.size()>0){
+			cc=(Collection) list.get(0);
+		}
+		return cc ;
+	}
+	
 }

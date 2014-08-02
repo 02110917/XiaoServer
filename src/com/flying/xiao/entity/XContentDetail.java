@@ -10,6 +10,7 @@ public class XContentDetail extends Base
 	private XContent content;
 	private List<XComment> comments ;
 	private XContentType contentType ;
+
 	public XContentType getContentType() {
 		return contentType;
 	}

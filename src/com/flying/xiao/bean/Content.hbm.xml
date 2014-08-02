@@ -8,7 +8,7 @@
     <class name="com.flying.xiao.bean.Content" table="Content" schema="dbo" catalog="Xiao">
         <id name="id" type="java.lang.Long">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="userInfo" class="com.flying.xiao.bean.UserInfo" fetch="select" lazy="false">
             <column name="con_user_id" />
@@ -54,6 +54,12 @@
                 <column name="pl_con_id" />
             </key>
             <one-to-many class="com.flying.xiao.bean.PingLun" />
+        </set>
+        <set name="losts" inverse="true">
+            <key>
+                <column name="lost_con_id" />
+            </key>
+            <one-to-many class="com.flying.xiao.bean.Lost" />
         </set>
         <set name="erShous" inverse="true">
             <key>

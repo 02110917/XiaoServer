@@ -8,7 +8,7 @@
     <class name="com.flying.xiao.bean.Image" table="Image" schema="dbo" catalog="Xiao">
         <id name="imageId" type="java.lang.Long">
             <column name="image_id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="content" class="com.flying.xiao.bean.Content" fetch="select">
             <column name="image_content_id" />

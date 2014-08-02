@@ -3,6 +3,8 @@ package com.flying.xiao.entity;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.flying.xiao.bean.Content;
+
 public class XContent extends Base
 {
 	private Long id;
@@ -11,7 +13,8 @@ public class XContent extends Base
 	private String userRealNama ;
 	private List<XPraise> praiseList ;
 	private double price ;
-	private boolean isMeIsPraise;
+	private boolean isMeIsPraise; //我是否点赞  【在获取到User session的情况下返回】
+	private boolean isMeCollecte ; //我是否收藏【在获取到User session的情况下返回】
 	private List<XImage> images;
 	private Timestamp conPubTime;
 	private Integer conZan;
@@ -22,6 +25,16 @@ public class XContent extends Base
 	private List<XComment> comments;
 	private String conSummary;
 	
+	
+	@Override
+	public <T> void copy(T t)
+	{
+		super.copy(t);
+		this.setUserId(((Content)t).getUserInfo().getId());
+		if (this.getConImageUrl() == null)
+			this.setConImageUrl(((Content)t).getUserInfo().getUserHeadImageUrl());
+		this.setUserRealNama(((Content)t).getUserInfo().getUserRealName());
+	}
 	public List<XImage> getImages()
 	{
 		return images;
@@ -37,6 +50,15 @@ public class XContent extends Base
 	public void setMeIsPraise(boolean isMeIsPraise)
 	{
 		this.isMeIsPraise = isMeIsPraise;
+	}
+	
+	public boolean isMeCollecte()
+	{
+		return isMeCollecte;
+	}
+	public void setMeCollecte(boolean isMeCollecte)
+	{
+		this.isMeCollecte = isMeCollecte;
 	}
 	public List<XPraise> getPraiseList()
 	{
