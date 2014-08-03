@@ -32,7 +32,6 @@ public class GetComments extends BaseServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
-		UserInfo userSession = (UserInfo) request.getSession().getAttribute("user");
 		String conIdStr=request.getParameter("contentid");
 		String pageStr=request.getParameter("page");
 		if(conIdStr==null){

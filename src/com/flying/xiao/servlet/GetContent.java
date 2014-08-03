@@ -42,7 +42,6 @@ public class GetContent extends BaseServlet
 		// response.setContentType("text/json;charset=UTF-8");
 		// response.setCharacterEncoding("UTF-8");
 		super.doGet(request, response);
-		UserInfo userSession = (UserInfo) request.getSession().getAttribute("user");
 		String type = request.getParameter("type");
 		if (type != null)
 		{

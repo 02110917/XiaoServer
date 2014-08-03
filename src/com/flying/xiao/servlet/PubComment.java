@@ -1,11 +1,9 @@
 package com.flying.xiao.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,26 +17,20 @@ import com.flying.xiao.dao.CommentDaoImpl;
 import com.flying.xiao.dao.ContentDaoImpl;
 import com.flying.xiao.dao.IBaseHibernateDAO;
 import com.flying.xiao.dao.UsersDaoImpl;
-import com.flying.xiao.entity.Base;
 import com.flying.xiao.entity.XComment;
 import com.flying.xiao.entity.XUserInfo;
 
-public class PubComment extends HttpServlet
+public class PubComment extends BaseServlet
 {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-
-		response.setContentType("text/json;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		PrintWriter pw = response.getWriter();
+		super.doGet(request, response);
 		String contentIdStr = request.getParameter("contentid");
 		String userIdStr = request.getParameter("userId");
 		String commentInfo = request.getParameter("commentInfo");
 		String replyIdStr=request.getParameter("replyId"); //»Ø¸´ÆÀÂÛ±àºÅ
-		UserInfo userSession = (UserInfo) request.getSession().getAttribute("user");
 		XComment com = new XComment();
 		if (userSession == null)
 		{

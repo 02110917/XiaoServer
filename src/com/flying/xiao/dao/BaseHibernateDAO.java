@@ -324,4 +324,23 @@ public List<T> findByHql(String hql)
 	   getSession().close();
 	  }
 }
+@Override
+public T findOneByHql(String hql)
+{
+	 log.debug("finding all doamin instances");
+	  try {
+	   Query queryObject = getSession().createQuery(hql);
+	   List<T> list= queryObject.list();
+	   if(list!=null&&list.size()>0){
+		   return list.get(0);
+	   }
+		   
+	  } catch (RuntimeException re) {
+	   log.error("find all failed", re);
+	   throw re;
+	  }finally{
+	   getSession().close();
+	  }
+	  return null;
+}
 }

@@ -41,6 +41,7 @@
 		<mapping resource="com/flying/xiao/bean/Image.hbm.xml" />
 		<mapping
 			resource="com/flying/xiao/bean/ErShouGoodsTypeSecond.hbm.xml" />
+		<mapping resource="com/flying/xiao/bean/Lost.hbm.xml" />
 
 	</session-factory>
 

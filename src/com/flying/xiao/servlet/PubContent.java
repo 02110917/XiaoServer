@@ -47,10 +47,7 @@ public class PubContent extends BaseServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
-		PrintWriter pw = response.getWriter();
-//		String typeStr=request.getParameter("type");
 		String contentJson=request.getParameter("content");
-		UserInfo userSession = (UserInfo) request.getSession().getAttribute("user");
 		if(userSession==null){
 			printErrorMsg(Constant.ErrorCode.USER_NOT_LOGIN, "ÓÃ»§Î´µÇÂ½...", pw);
 			return ;

@@ -33,6 +33,7 @@ public interface IBaseHibernateDAO<T> {
 
  public List<T> findByHql(String hql,int firstResult,int size);
  public List<T> findByHql(String hql);
+ public T findOneByHql(String hql);
  public  boolean update(T domain);
 
 }

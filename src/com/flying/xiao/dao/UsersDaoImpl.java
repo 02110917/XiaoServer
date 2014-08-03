@@ -31,4 +31,11 @@ public class UsersDaoImpl extends BaseHibernateDAO<UserInfo> implements UsersDao
 		else return null;
 	}
 
+
+	@Override
+	public List<UserInfo> findByType(int typeid, int firstResult, int size)
+	{
+		return super.findByHql("from UserInfo user where user.userTypeId="+typeid, firstResult, size);
+	}
+
 	}

@@ -15,6 +15,10 @@ public class Constant
 		public static final int UPDATE_CONTENT_ERROR=0X09;
 		public static final int GET_COLLECTION_ERROR=0X0A; 
 		public static final int USER_REGIEST_ERROR=0X0B;
+		public static final int GET_USERINFOS_ERROR=0X0C;
+		public static final int USER_NOT_FOUNT=0X0D;
+		public static final int SAVE_ERROR=0X0E;
+		public static final int ADD_FRIEND_IS_YOUR_FRIEND_ALERADY=0X0F;
 	}
 	
 	public static class ContentType{
@@ -28,4 +32,5 @@ public class Constant
 	public static class WenzhangType{
 //		public static final int WENZHANG_TYPE_
 	}
+
 }

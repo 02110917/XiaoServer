@@ -8,7 +8,7 @@
     <class name="com.flying.xiao.bean.ErShouType" table="ErShouType" schema="dbo" catalog="Xiao">
         <id name="esTypeId" type="java.lang.Integer">
             <column name="es_type_id" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="esTypeName" type="java.lang.String">
             <column name="es_type_name" length="100" />

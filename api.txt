@@ -65,4 +65,11 @@
 	【session 可选】  !=null 代表获取我的评论列表
 	contentid 内容id
 	page 页数 【可选】 ==null代表获取前几天数据
+	获取用户列表	
+	/XiaoServer/servlet/GetUserInfos 【session 可选 !=null 返回是否是自己的好友】 
+	参数: type 用户类型  1:个人  2:部门 	3:商家
+		 page  页数 【可选】 ==null代表获取前几天数据
 	
+	添加朋友 【session】
+	/XiaoServer/servlet/AddFriend
+	参数:userId 添加的好友id

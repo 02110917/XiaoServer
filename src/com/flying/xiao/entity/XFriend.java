@@ -7,8 +7,8 @@ package com.flying.xiao.entity;
  */
 public class XFriend extends Base{
     private Long id;
-    private XUserInfo userInfoByUserId;   //me 
-    private XUserInfo userInfoByUserFriendBelongUserId; // my friend 
+    private XUserInfo userInfoByUserId;   //my friend 
+    private XUserInfo userInfoByUserFriendBelongUserId; // me
 	public Long getId() {
 		return id;
 	}
