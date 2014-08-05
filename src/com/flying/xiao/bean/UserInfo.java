@@ -27,6 +27,7 @@ public class UserInfo  implements java.io.Serializable {
      private Integer userFuns;
      private Boolean userIsQiandao;
      private String userPhone;
+     private String userInfoDetail;
      private Set messagesForMsgUserId = new HashSet(0);
      private Set friendsForUserFriendBelongUserId = new HashSet(0);
      private Set contents = new HashSet(0);
@@ -97,7 +98,17 @@ public class UserInfo  implements java.io.Serializable {
         this.userName = userName;
     }
 
-    public String getUserPsd() {
+    public String getUserInfoDetail()
+	{
+		return userInfoDetail;
+	}
+
+	public void setUserInfoDetail(String userInfoDetail)
+	{
+		this.userInfoDetail = userInfoDetail;
+	}
+
+	public String getUserPsd() {
         return this.userPsd;
     }
     

@@ -34,6 +34,9 @@
         <property name="userEmail" type="java.lang.String">
             <column name="user_email" length="50" />
         </property>
+         <property name="userInfoDetail" type="java.lang.String">
+            <column name="user_info_detail"  />
+        </property>
         <property name="userTypeId" type="java.lang.Integer">
             <column name="user_type_id" not-null="true" />
         </property>
